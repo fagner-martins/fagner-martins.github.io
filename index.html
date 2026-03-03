@@ -35,12 +35,6 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .bento-card:hover { 
-            border-color: var(--accent); 
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
-        }
-
         /* --- LOGO GRANDE --- */
         .card-logo-foco {
             grid-column: span 4;
@@ -57,10 +51,13 @@
 
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
+        /* NOME COM AJUSTE RESPONSIVO */
         .nome-agua {
-            font-size: 3.2rem; font-weight: 800; color: #fff;
+            font-size: 3.5rem; /* Tamanho padrão Desktop */
+            font-weight: 800; color: #fff;
             position: relative; text-transform: uppercase;
             line-height: 1.1; display: inline-block; margin-top: 15px;
+            white-space: nowrap; /* Impede quebra de linha indesejada */
         }
 
         .nome-agua::before {
@@ -84,7 +81,6 @@
             font-weight: 800; text-transform: uppercase; text-decoration: none;
             display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
         }
-        .btn-whats:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2); }
 
         .status-dot {
             display: inline-block; width: 10px; height: 10px; background: #22c55e;
@@ -98,10 +94,19 @@
             padding: 12px 18px; border-radius: 16px; font-weight: 600; font-size: 0.8rem;
         }
 
-        @media (max-width: 1024px) {
-            .container-bento { grid-template-columns: 1fr; }
+        /* --- AJUSTES PARA MOBILE --- */
+        @media (max-width: 768px) {
+            .container-bento { grid-template-columns: 1fr; padding: 15px; margin-top: 20px; }
             .card-logo-foco, .card-services, .card-cta { grid-column: span 1; }
-            .logo-bento-grande { width: 300px; }
+            
+            .logo-bento-grande { width: 280px; } /* Logo menor no mobile */
+            
+            .nome-agua { 
+                font-size: 2.1rem; /* Nome menor para caber na tela do celular */
+                margin-top: 10px;
+            }
+            
+            .bento-card { padding: 20px; border-radius: 24px; }
         }
     </style>
 </head>
@@ -120,26 +125,26 @@
         </section>
 
         <section class="bento-card card-services">
-            <h3 class="text-blue-500 font-bold uppercase text-xs mb-6 tracking-widest">Especialista em Soluções Web de Alta Performance</h3>
+            <h3 class="text-blue-500 font-bold uppercase text-xs mb-6 tracking-widest text-center md:text-left">Especialista em Soluções Web de Alta Performance</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                <div class="service-item"><i class="fas fa-rocket text-blue-500 mr-2"></i> Landing Pages</div>
-                <div class="service-item"><i class="fas fa-newspaper text-blue-500 mr-2"></i> Portais de Notícias</div>
-                <div class="service-item"><i class="fas fa-chart-line text-blue-500 mr-2"></i> Dashboards Web</div>
-                <div class="service-item"><i class="fas fa-database text-blue-500 mr-2"></i> Sistemas ERP/CRM</div>
-                <div class="service-item"><i class="fas fa-code text-blue-500 mr-2"></i> APIs Escaláveis</div>
-                <div class="service-item"><i class="fas fa-mobile-alt text-blue-500 mr-2"></i> Sites Responsivos</div>
+                <div class="service-item text-center md:text-left"><i class="fas fa-rocket text-blue-500 mr-2"></i> Landing Pages</div>
+                <div class="service-item text-center md:text-left"><i class="fas fa-newspaper text-blue-500 mr-2"></i> Portais de Notícias</div>
+                <div class="service-item text-center md:text-left"><i class="fas fa-chart-line text-blue-500 mr-2"></i> Dashboards Web</div>
+                <div class="service-item text-center md:text-left"><i class="fas fa-database text-blue-500 mr-2"></i> Sistemas ERP/CRM</div>
+                <div class="service-item text-center md:text-left"><i class="fas fa-code text-blue-500 mr-2"></i> APIs Escaláveis</div>
+                <div class="service-item text-center md:text-left"><i class="fas fa-mobile-alt text-blue-500 mr-2"></i> Sites Responsivos</div>
             </div>
         </section>
 
         <section class="bento-card card-cta flex flex-col justify-center items-center">
             <i class="fab fa-whatsapp text-5xl mb-4"></i>
             <h2 class="text-xl font-black mb-6 leading-tight uppercase">Bora criar seu sistema?</h2>
-            <a href="https://wa.me/5584996312810?text=Olá+Fagner!+Vi+seu+site+e+gostaria+de+falar+sobre+um+projeto." target="_blank" class="btn-whats">CONVERSAR</a>
+            <a href="https://wa.me/5584996312810?text=Olá+Fagner!+Vi+seu+site+e+gostaria+de+falar+sobre+um+projeto." target="_blank" class="btn-whats text-sm md:text-base">CONVERSAR</a>
         </section>
 
     </main>
 
-    <footer class="text-center pb-10 opacity-20 text-[10px] tracking-[6px] uppercase font-bold">
+    <footer class="text-center pb-10 opacity-20 text-[10px] tracking-[4px] md:tracking-[6px] uppercase font-bold">
         Sistemas Inteligentes • Fagner Martins
     </footer>
 
