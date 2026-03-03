@@ -35,7 +35,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* --- LOGO GRANDE --- */
+        /* --- LOGO E NOME --- */
         .card-logo-foco {
             grid-column: span 4;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -43,21 +43,18 @@
         }
 
         .logo-bento-grande {
-            width: 450px; 
-            max-width: 90%;
+            width: 450px; max-width: 90%;
             filter: drop-shadow(0 0 30px rgba(0, 123, 255, 0.3));
             animation: flutuar 6s ease-in-out infinite;
         }
 
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* NOME COM AJUSTE RESPONSIVO */
         .nome-agua {
-            font-size: 3.5rem; /* Tamanho padrão Desktop */
-            font-weight: 800; color: #fff;
+            font-size: 3.5rem; font-weight: 800; color: #fff;
             position: relative; text-transform: uppercase;
             line-height: 1.1; display: inline-block; margin-top: 15px;
-            white-space: nowrap; /* Impede quebra de linha indesejada */
+            white-space: nowrap;
         }
 
         .nome-agua::before {
@@ -73,8 +70,40 @@
             50% { clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%); }
         }
 
+        /* --- CARDS --- */
         .card-services { grid-column: span 3; }
         .card-cta { grid-column: span 1; background: linear-gradient(135deg, #007BFF 0%, #001a33 100%); text-align: center; }
+
+        .service-item {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 18px; border-radius: 16px; font-weight: 600; font-size: 0.8rem;
+            display: flex; align-items: center;
+        }
+
+        /* --- NOVO TEXTO DE IMPACTO COM EFEITO --- */
+        .texto-chamativo {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .highlight-glow {
+            color: #fff;
+            font-weight: 800;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(0, 123, 255, 0.8);
+            animation: brilhoPalavra 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes brilhoPalavra {
+            from { text-shadow: 0 0 5px rgba(0, 123, 255, 0.4); color: #fff; }
+            to { text-shadow: 0 0 20px rgba(0, 123, 255, 1); color: var(--accent); }
+        }
 
         .btn-whats {
             background: white; color: black; padding: 15px 30px; border-radius: 100px;
@@ -89,24 +118,13 @@
 
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
 
-        .service-item {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
-            padding: 12px 18px; border-radius: 16px; font-weight: 600; font-size: 0.8rem;
-        }
-
-        /* --- AJUSTES PARA MOBILE --- */
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
-            .container-bento { grid-template-columns: 1fr; padding: 15px; margin-top: 20px; }
+            .container-bento { grid-template-columns: 1fr; }
             .card-logo-foco, .card-services, .card-cta { grid-column: span 1; }
-            
-            .logo-bento-grande { width: 280px; } /* Logo menor no mobile */
-            
-            .nome-agua { 
-                font-size: 2.1rem; /* Nome menor para caber na tela do celular */
-                margin-top: 10px;
-            }
-            
-            .bento-card { padding: 20px; border-radius: 24px; }
+            .logo-bento-grande { width: 280px; }
+            .nome-agua { font-size: 2.1rem; }
+            .texto-chamativo { font-size: 0.95rem; text-align: center; }
         }
     </style>
 </head>
@@ -126,25 +144,32 @@
 
         <section class="bento-card card-services">
             <h3 class="text-blue-500 font-bold uppercase text-xs mb-6 tracking-widest text-center md:text-left">Especialista em Soluções Web de Alta Performance</h3>
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                <div class="service-item text-center md:text-left"><i class="fas fa-rocket text-blue-500 mr-2"></i> Landing Pages</div>
-                <div class="service-item text-center md:text-left"><i class="fas fa-newspaper text-blue-500 mr-2"></i> Portais de Notícias</div>
-                <div class="service-item text-center md:text-left"><i class="fas fa-chart-line text-blue-500 mr-2"></i> Dashboards Web</div>
-                <div class="service-item text-center md:text-left"><i class="fas fa-database text-blue-500 mr-2"></i> Sistemas ERP/CRM</div>
-                <div class="service-item text-center md:text-left"><i class="fas fa-code text-blue-500 mr-2"></i> APIs Escaláveis</div>
-                <div class="service-item text-center md:text-left"><i class="fas fa-mobile-alt text-blue-500 mr-2"></i> Sites Responsivos</div>
+                <div class="service-item"><i class="fas fa-rocket text-blue-500 mr-2"></i> Landing Pages</div>
+                <div class="service-item"><i class="fas fa-newspaper text-blue-500 mr-2"></i> Portais de Notícias</div>
+                <div class="service-item"><i class="fas fa-chart-line text-blue-500 mr-2"></i> Dashboards Web</div>
+                <div class="service-item"><i class="fas fa-database text-blue-500 mr-2"></i> Sistemas ERP/CRM</div>
+                <div class="service-item"><i class="fas fa-code text-blue-500 mr-2"></i> APIs Escaláveis</div>
+                <div class="service-item"><i class="fas fa-mobile-alt text-blue-500 mr-2"></i> Sites Responsivos</div>
+            </div>
+
+            <div class="texto-chamativo">
+                Não importa qual seja sua necessidade, desenvolvemos seu projeto com 
+                <span class="highlight-glow">Rapidez</span> e 
+                <span class="highlight-glow">Qualidade</span>.
             </div>
         </section>
 
         <section class="bento-card card-cta flex flex-col justify-center items-center">
             <i class="fab fa-whatsapp text-5xl mb-4"></i>
             <h2 class="text-xl font-black mb-6 leading-tight uppercase">Bora criar seu sistema?</h2>
-            <a href="https://wa.me/5584996312810?text=Olá+Fagner!+Vi+seu+site+e+gostaria+de+falar+sobre+um+projeto." target="_blank" class="btn-whats text-sm md:text-base">CONVERSAR</a>
+            <a href="https://wa.me/5584996312810?text=Olá+Fagner!+Vi+seu+site+e+gostaria+de+falar+sobre+um+projeto." target="_blank" class="btn-whats">CONVERSAR</a>
         </section>
 
     </main>
 
-    <footer class="text-center pb-10 opacity-20 text-[10px] tracking-[4px] md:tracking-[6px] uppercase font-bold">
+    <footer class="text-center pb-10 opacity-20 text-[10px] tracking-[6px] uppercase font-bold">
         Sistemas Inteligentes • Fagner Martins
     </footer>
 
