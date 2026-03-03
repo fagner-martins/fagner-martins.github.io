@@ -12,6 +12,7 @@
     <style>
         :root { 
             --azul-claro: #00D2FF; 
+            --azul-medio: #007BFF;
             --azul-escuro: #001A33; 
             --fundo: #010409;
         }
@@ -21,55 +22,105 @@
             margin: 0; min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
             font-family: 'Lexend', sans-serif;
-            overflow: hidden;
         }
 
-        /* Painel Centralizado */
         .painel-vidro {
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 45px;
             padding: 60px 40px;
             width: 90%; max-width: 500px;
             text-align: center;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
-            position: relative; z-index: 10;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
         }
 
         .logo-principal {
-            width: 300px; margin: 0 auto 35px;
-            filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.3));
+            width: 280px; margin: 0 auto 30px;
+            filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.4));
             animation: flutuar 5s ease-in-out infinite;
         }
 
-        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* --- EFEITO DE ÁGUA NO NOME --- */
+        /* --- NOVO EFEITO LÍQUIDO SEGURO --- */
         .nome-agua {
-            font-size: 2.3rem;
+            font-size: 2.5rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            position: relative;
-            color: rgba(255, 255, 255, 0.1);
+            letter-spacing: 2px;
+            /* Gradiente que simula a água */
+            background: linear-gradient(
+                to bottom, 
+                rgba(255,255,255,0.1) 40%, 
+                var(--azul-claro) 50%, 
+                var(--azul-medio) 100%
+            );
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: ondas 4s ease-in-out infinite;
             display: inline-block;
-            line-height: 1.2;
-            cursor: default;
         }
 
-        .nome-agua::before {
-            content: "FAGNER MARTINS";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            color: var(--azul-claro);
-            overflow: hidden;
-            animation: encherAgua 5s ease-in-out infinite;
+        @keyframes ondas {
+            0%, 100% { background-position: 50% 100%; }
+            50% { background-position: 50% 10%; } /* Faz a cor "subir" e "descer" */
         }
 
-        @keyframes encherAgua {
-            0%, 100% { 
-                clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%); 
-            }
-            50% { 
-                clip-path: polygon(0% 45%, 16% 40%, 33% 45%, 52% 50%, 68% 48%, 84
+        .botao-acao {
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white; padding: 20px; border-radius: 20px;
+            text-decoration: none; font-weight: 800; text-transform: uppercase;
+            font-size: 0.85rem; transition: 0.4s;
+            margin-top: 15px;
+        }
+
+        .botao-acao:hover { 
+            background: rgba(0, 123, 255, 0.2); 
+            border-color: var(--azul-claro); 
+            transform: scale(1.02);
+        }
+
+        .subtitulo {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin: 15px 0 35px;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="painel-vidro">
+        <img src="Logo-Fagner-Martins.png" alt="Fagner Martins" class="logo-principal">
+
+        <div>
+            <h1 class="nome-agua">Fagner Martins</h1>
+        </div>
+
+        <p class="subtitulo">
+            Desenvolvimento de <span style="color: var(--azul-claro); font-weight: 700;">Sistemas e Sites Web</span>
+        </p>
+
+        <div class="flex flex-col">
+            <a href="https://wa.me/5584996312810" target="_blank" class="botao-acao">
+                <i class="fab fa-whatsapp text-green-500 text-2xl"></i>
+                Solicitar Orçamento
+            </a>
+
+            <a href="https://github.com/fagner-martins" target="_blank" class="botao-acao">
+                <i class="fab fa-github text-white text-2xl"></i>
+                Ver Repositórios
+            </a>
+        </div>
+
+        <footer class="mt-12 opacity-20 text-[10px] uppercase tracking-[5px] font-bold">
+            Sistemas Inteligentes
+        </footer>
+    </main>
+
+</body>
+</html>
