@@ -3,146 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fagner Martins | Expert Developer</title>
+    <title>Fagner Martins | Desenvolvimento de Sistemas e Sites Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;600;900&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --blue-glow: #007BFF; --dark-depth: #010409; }
+        :root { --accent: #007BFF; --deep: #010409; }
         
         body { 
-            margin: 0; padding: 0; background: var(--dark-depth); 
-            overflow: hidden; height: 100vh; display: flex; 
-            align-items: center; justify-content: center;
-            font-family: 'Lexend', sans-serif;
+            background: var(--deep); 
+            margin: 0; padding: 0; 
+            overflow: hidden; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        /* Fundo Oceânico Profundo */
-        .ocean-bg {
+        /* Oceano Dinâmico */
+        .ocean-world {
             position: absolute; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 123, 255, 0.15) 0%, var(--dark-depth) 100%);
+            background: radial-gradient(circle at 50% 10%, #001a33 0%, var(--deep) 80%);
             z-index: 1;
         }
 
-        /* Sistema de Bolhas e Partículas */
         .bubble {
-            position: absolute; bottom: -50px; background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%; animation: rise infinite ease-in;
-            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+            position: absolute; bottom: -100px; background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%; animation: float-up infinite ease-in;
+            box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.2);
         }
 
-        @keyframes rise {
+        @keyframes float-up {
             0% { transform: translateY(0) scale(1); opacity: 0; }
-            20% { opacity: 0.6; }
-            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+            20% { opacity: 0.4; }
+            100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
         }
 
-        /* Card com Vidro de Alta Qualidade */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(50px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Card Principal */
+        .main-card {
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(40px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4rem;
             position: relative; z-index: 10;
-            box-shadow: 0 0 120px rgba(0, 123, 255, 0.1);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
         }
 
-        /* Logo com Brilho Pulsante */
-        .logo-premium { 
-            width: 340px;
-            filter: drop-shadow(0 0 30px rgba(0, 123, 255, 0.6));
-            animation: float 5s ease-in-out infinite, glow-pulse 3s infinite alternate;
+        /* Logo com Brilho */
+        .logo-img {
+            width: 380px; position: relative; z-index: 2;
+            filter: drop-shadow(0 0 30px rgba(0, 123, 255, 0.5));
+            animation: floating 6s ease-in-out infinite;
         }
 
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
-        @keyframes glow-pulse { 0% { filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.4)); } 100% { filter: drop-shadow(0 0 50px rgba(0, 123, 255, 0.9)); } }
-
-        /* Botões com Efeito de Preenchimento Hidráulico */
-        .btn-hydro {
-            position: relative; overflow: hidden;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-        }
-        
-        .btn-hydro::before {
-            content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(0deg, var(--blue-glow), transparent);
-            transition: all 0.5s ease; z-index: -1;
-        }
-
-        .btn-hydro:hover::before { top: 0; }
-        .btn-hydro:hover { border-color: var(--blue-glow); box-shadow: 0 0 30px rgba(0, 123, 255, 0.4); transform: scale(1.03); }
-
-        .typing-container {
-            min-height: 30px;
-            text-shadow: 0 0 20px rgba(0, 123, 255, 1);
-            letter-spacing: 0.4em;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="ocean-bg" id="bubbles-container"></div>
-
-    <main class="relative z-50 w-full max-w-lg p-6">
-        <div class="glass-card rounded-[5rem] p-16 text-center">
-            
-            <div class="mb-16">
-                <img src="Logo-Fagner-Martins.jpg" alt="Logo Fagner Martins" class="logo-premium mx-auto">
-            </div>
-
-            <div class="mb-16">
-                <p id="typing" class="typing-container text-white text-sm font-black uppercase italic"></p>
-                <div class="h-1 w-16 bg-blue-600 mx-auto mt-6 rounded-full shadow-[0_0_15px_#007BFF]"></div>
-            </div>
-
-            <div class="space-y-6">
-                <a href="https://wa.me/55DDD9XXXXXXXX" target="_blank" class="btn-hydro flex items-center justify-between p-6 rounded-[2.5rem] w-full group">
-                    <span class="flex items-center gap-4 text-white font-bold text-xs">
-                        <i class="fab fa-whatsapp text-green-400 text-2xl"></i> PROJETOS EXCLUSIVOS
-                    </span>
-                    <i class="fas fa-chevron-right text-[10px] text-white opacity-30 group-hover:translate-x-2 transition-all"></i>
-                </a>
-
-                <a href="https://github.com/fagner-martins" target="_blank" class="btn-hydro flex items-center justify-between p-6 rounded-[2.5rem] w-full group">
-                    <span class="flex items-center gap-4 text-white font-bold text-xs">
-                        <i class="fab fa-github text-white text-2xl"></i> PORTFÓLIO GITHUB
-                    </span>
-                    <i class="fas fa-chevron-right text-[10px] text-white opacity-30 group-hover:translate-x-2 transition-all"></i>
-                </a>
-            </div>
-
-            <p class="mt-16 text-white/20 text-[10px] font-bold uppercase tracking-[0.5em]">Zigol Technology • 2026</p>
-        </div>
-    </main>
-
-    <script>
-        // Gerador de Bolhas Aleatórias
-        const container = document.getElementById('bubbles-container');
-        for (let i = 0; i < 25; i++) {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-            const size = Math.random() * 30 + 5 + 'px';
-            bubble.style.width = size;
-            bubble.style.height = size;
-            bubble.style.left = Math.random() * 100 + '%';
-            bubble.style.animationDuration = Math.random() * 5 + 5 + 's';
-            bubble.style.animationDelay = Math.random() * 5 + 's';
-            container.appendChild(bubble);
-        }
-
-        // Texto de Digitação
-        const messages = ["Laravel Specialist", "Sistemas Premium", "Filament Expert", "Full Stack Developer"];
-        let mIdx = 0, cIdx = 0, isDeleting = false;
-        function type() {
-            const current = messages[mIdx];
-            document.getElementById('typing').textContent = isDeleting ? current.substring(0, cIdx--) : current.substring(0, cIdx++);
-            if (!isDeleting && cIdx === current.length + 1) { isDeleting = true; setTimeout(type, 2000); }
-            else if (isDeleting && cIdx === 0) { isDeleting = false; mIdx = (mIdx + 1) % messages.length; setTimeout(type, 500); }
-            else { setTimeout(type, isDeleting ? 50 : 100); }
-        }
-        type();
-    </script>
-</body>
-</html>
+        @keyframes floating { 0
