@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fagner Martins | Sistemas Web</title>
+    <title>Fagner Martins | Desenvolvimento de Sistemas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,37 +11,38 @@
         body, html {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
-            background-color: #010409; /* Cor de segurança */
+            background-color: #010409;
             overflow: hidden;
             font-family: 'Lexend', sans-serif;
         }
 
-        /* Fundo com efeito de profundidade */
+        /* Fundo Oceânico */
         .ocean {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: linear-gradient(180deg, #001a33 0%, #010409 100%);
+            background: radial-gradient(circle at 50% 50%, #001a33 0%, #010409 100%);
             z-index: 1;
         }
 
-        /* Bolhas */
+        /* Bolhas Realistas */
         .bubble {
             position: absolute;
-            bottom: -50px;
+            bottom: -100px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             animation: rise infinite ease-in;
             z-index: 2;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         @keyframes rise {
             0% { transform: translateY(0) scale(1); opacity: 0; }
-            50% { opacity: 0.3; }
-            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+            20% { opacity: 0.4; }
+            100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
         }
 
-        /* Card de Vidro */
+        /* Card Principal */
         .content-wrapper {
             position: relative;
             z-index: 10;
@@ -54,57 +55,72 @@
 
         .glass-box {
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 3rem;
-            padding: 3rem;
+            border-radius: 4rem;
+            padding: 4rem 3rem;
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
         }
 
+        /* Logo Grande e Brilhante */
         .logo-main {
-            width: 320px;
-            margin: 0 auto 2.5rem;
-            filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.6));
-            animation: float 5s ease-in-out infinite;
+            width: 100%;
+            max-width: 350px; /* Logo maior como você pediu */
+            margin: 0 auto 3rem;
+            filter: drop-shadow(0 0 30px rgba(0, 123, 255, 0.5));
+            animation: float 6s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-20px); }
         }
 
         .typing {
-            color: #007BFF;
+            color: #fff;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
+            letter-spacing: 3px;
+            font-size: 1rem;
             min-height: 1.5rem;
+            text-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
         }
 
+        /* Botões Estilo Premium */
         .btn {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: white;
-            padding: 1.2rem;
-            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            border-radius: 2rem;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 1.2rem;
         }
 
         .btn:hover {
             background: rgba(0, 123, 255, 0.2);
             border-color: #007BFF;
-            transform: scale(1.02);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.3);
+        }
+
+        .footer-text {
+            margin-top: 3.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -114,57 +130,9 @@
 
     <div class="content-wrapper">
         <div class="glass-box">
-            <img src="Logo-Fagner-Martins.jpg" alt="Fagner Martins" class="logo-main">
+            <img src="Logo-Fagner-Martins.png" alt="Fagner Martins" class="logo-main">
 
-            <div class="mb-10">
+            <div class="mb-12">
                 <p id="typewriter" class="typing"></p>
-                <div class="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+                <div class="w-16 h-1 bg-blue-600 mx-auto mt-6 rounded-full shadow-[0_0_15px_#007BFF]"></div>
             </div>
-
-            <div class="space-y-4">
-                <a href="https://wa.me/5599999999999" target="_blank" class="btn">
-                    <i class="fab fa-whatsapp text-green-400 text-xl"></i>
-                    SOLICITAR SISTEMA
-                </a>
-                <a href="https://github.com/fagner-martins" target="_blank" class="btn">
-                    <i class="fab fa-github text-xl"></i>
-                    PORTFÓLIO GITHUB
-                </a>
-            </div>
-
-            <p class="mt-12 text-white/20 text-[10px] tracking-[0.3em] uppercase font-bold">
-                Desenvolvimento de Sistemas de Alta Classe
-            </p>
-        </div>
-    </div>
-
-    <script>
-        // Criar bolhas
-        const container = document.getElementById('bubbles-container');
-        function addBubble() {
-            const b = document.createElement('div');
-            const size = Math.random() * 30 + 10 + 'px';
-            b.className = 'bubble';
-            b.style.width = size;
-            b.style.height = size;
-            b.style.left = Math.random() * 100 + '%';
-            b.style.animationDuration = Math.random() * 5 + 5 + 's';
-            container.appendChild(b);
-            setTimeout(() => b.remove(), 10000);
-        }
-        setInterval(addBubble, 400);
-
-        // Efeito de texto
-        const words = ["Sistemas Web Premium", "Especialista Laravel", "Sites de Alta Performance", "Soluções sob Medida"];
-        let i = 0, j = 0, isDeleting = false;
-        function type() {
-            const current = words[i];
-            document.getElementById('typewriter').textContent = isDeleting ? current.substring(0, j--) : current.substring(0, j++);
-            if (!isDeleting && j === current.length + 1) { isDeleting = true; setTimeout(type, 2000); }
-            else if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % words.length; setTimeout(type, 500); }
-            else { setTimeout(type, isDeleting ? 40 : 100); }
-        }
-        type();
-    </script>
-</body>
-</html>
