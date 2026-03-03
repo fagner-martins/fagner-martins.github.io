@@ -3,32 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fagner Martins | Developer</title>
+    <title>Fagner Martins | Full Stack Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lexend:wght@300;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #000; color: white; font-family: sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        :root { --main-blue: #007BFF; --dark-bg: #030712; }
+        body { 
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 20% 35%, rgba(0, 123, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 65%, rgba(0, 123, 255, 0.1) 0%, transparent 40%);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .logo-glow {
+            filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.4));
+            transition: all 0.5s ease;
+        }
+        .logo-glow:hover {
+            filter: drop-shadow(0 0 35px rgba(0, 123, 255, 0.6));
+            transform: scale(1.02);
+        }
+        .btn-action {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-action:hover {
+            background: rgba(0, 123, 255, 0.1);
+            border-color: var(--main-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(0, 123, 255, 0.5);
+        }
+        .title-tech { font-family: 'Lexend', sans-serif; }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="glass p-12 rounded-[3rem] max-w-lg w-full text-center shadow-2xl shadow-blue-900/20">
-        <img src="Logo-Fagner-Martins.png" alt="Fagner Martins" class="w-64 mx-auto mb-8 drop-shadow-[0_0_15px_rgba(0,123,255,0.4)]">
-        
-        <h1 class="text-3xl font-black italic uppercase text-gray-100 mb-2">Fagner Martins</h1>
-        <p class="text-blue-500 font-bold tracking-[0.3em] text-[10px] uppercase mb-10">Full Stack Developer</p>
+<body>
 
-        <div class="grid gap-4">
-            <a href="https://wa.me/SEUNUMERO" target="_blank" class="glass py-4 rounded-2xl hover:bg-blue-600 transition-all font-bold border border-blue-500/20">
-                🚀 WHATSAPP
-            </a>
-            <a href="https://github.com/fagner-martins" target="_blank" class="glass py-4 rounded-2xl hover:bg-white/10 transition-all font-bold">
-                💻 GITHUB
-            </a>
+    <main class="w-full max-w-lg p-6">
+        <div class="glass-card rounded-[3rem] p-10 md:p-14 text-center relative overflow-hidden">
+            
+            <div class="mb-10">
+                <img src="Logo-Fagner-Martins.png" alt="Logo Fagner Martins" class="w-64 mx-auto logo-glow">
+            </div>
+
+            <div class="mb-12">
+                <h1 class="title-tech text-3xl font-black italic uppercase tracking-tighter text-white mb-2">
+                    Fagner Martins
+                </h1>
+                <div class="h-1 w-12 bg-blue-600 mx-auto mb-4 rounded-full"></div>
+                <p class="text-blue-400 font-bold tracking-[0.4em] text-[10px] uppercase">
+                    Full Stack Developer
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <a href="https://wa.me/SEUNUMERO" target="_blank" class="btn-action group flex items-center justify-between p-5 rounded-2xl w-full">
+                    <span class="flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-xl text-green-500 group-hover:text-white"></i>
+                        <span class="font-bold text-sm tracking-wide">VAMOS CONVERSAR?</span>
+                    </span>
+                    <i class="fas fa-arrow-right text-xs opacity-30 group-hover:opacity-100 transition-opacity"></i>
+                </a>
+
+                <a href="https://github.com/fagner-martins" target="_blank" class="btn-action group flex items-center justify-between p-5 rounded-2xl w-full">
+                    <span class="flex items-center gap-4">
+                        <i class="fab fa-github text-xl"></i>
+                        <span class="font-bold text-sm tracking-wide">MEU REPOSITÓRIO</span>
+                    </span>
+                    <i class="fas fa-arrow-right text-xs opacity-30 group-hover:opacity-100 transition-opacity"></i>
+                </a>
+            </div>
+
+            <div class="mt-14 pt-8 border-t border-white/5">
+                <p class="text-gray-500 text-[9px] font-bold uppercase tracking-[0.2em]">
+                    Expert em Laravel & Filament • Zigol 2026
+                </p>
+            </div>
         </div>
-        
-        <p class="mt-10 text-gray-600 text-[10px] uppercase tracking-widest">
-            Laravel & Filament Expert • 2026
-        </p>
-    </div>
+    </main>
+
 </body>
 </html>
