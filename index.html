@@ -3,148 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fagner Martins | Desenvolvimento de Sistemas Web</title>
+    <title>Fagner Martins | Sistemas e Sites Web</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@900&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        :root { --accent: #007BFF; --bg-dark: #050505; --card-bg: rgba(15, 15, 15, 0.9); }
+        :root { 
+            --azul-marca: #00D2FF; 
+            --azul-profundo: #001A33; 
+            --preto-fundo: #050505;
+        }
         
         body { 
-            background: var(--bg-dark); color: white; 
+            background: radial-gradient(circle at 50% 50%, var(--azul-profundo) 0%, var(--preto-fundo) 100%);
+            margin: 0; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0; min-height: 100vh; overflow-x: hidden;
-            position: relative;
+            overflow-x: hidden;
         }
 
-        /* --- EFEITO BONITO AO MOVER O MOUSE (SPOTLIGHT + GLOW) --- */
+        /* Efeito de Luz que segue o Mouse */
         .mouse-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle 600px at var(--x, 50%) var(--y, 50%), rgba(0, 123, 255, 0.15), transparent 80%);
+            background: radial-gradient(circle 500px at var(--x, 50%) var(--y, 50%), rgba(0, 210, 255, 0.12), transparent 70%);
             z-index: 1; pointer-events: none;
         }
 
-        /* Partículas sutis de fundo */
-        .particles {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 0;
-        }
-
-        .container-bento {
+        /* Painel Centralizado (Estilo Card Premium) */
+        .card-principal {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 40px;
+            padding: 50px 40px;
+            width: 90%; max-width: 500px;
+            text-align: center;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.9);
             position: relative; z-index: 10;
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 20px; max-width: 1200px; margin: 40px auto; padding: 20px;
         }
 
-        .bento-card {
-            background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 32px; padding: 30px; backdrop-filter: blur(12px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* LOGO GRANDE E DESTAQUADA */
+        .logo-destaque {
+            width: 320px; /* Aumentada para preencher o espaço */
+            margin: 0 auto 40px;
+            filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.4));
+            animation: flutuar 5s ease-in-out infinite;
+            display: block;
         }
 
-        .bento-card:hover { 
-            border-color: var(--accent); 
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
+        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* --- ANIMAÇÃO DE ÁGUA NO NOME --- */
+        /* NOME COM EFEITO DE ÁGUA */
         .nome-agua {
-            font-size: 3rem; font-weight: 800; color: #fff;
-            position: relative; text-transform: uppercase;
-            line-height: 1.1; display: inline-block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            margin-bottom: 5px;
         }
 
         .nome-agua::before {
-            content: "Fagner Martins";
+            content: "FAGNER MARTINS";
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            color: var(--accent); overflow: hidden;
-            animation: agua 4s ease-in-out infinite;
-            -webkit-text-fill-color: var(--accent);
+            color: var(--azul-marca);
+            overflow: hidden;
+            animation: encherAgua 5s ease-in-out infinite;
         }
 
-        @keyframes agua {
-            0%, 100% { clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%); }
-            50% { clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%); }
+        @keyframes encherAgua {
+            0%, 100% { clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%); }
+            50% { clip-path: polygon(0% 45%, 15% 40%, 35% 45%, 55% 50%, 75% 48%, 90% 42%, 100% 45%, 100% 100%, 0% 100%); }
         }
 
-        /* Layout Bento */
-        .card-hero { grid-column: span 3; display: flex; align-items: center; justify-content: space-between; }
-        .card-cta { grid-column: span 1; background: linear-gradient(135deg, #007BFF 0%, #001a33 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .card-services { grid-column: span 2; }
-        .card-stack { grid-column: span 2; }
-
-        .logo-bento { width: 220px; filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.4)); animation: flutuar 6s ease-in-out infinite; }
-        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-        .btn-whats {
-            background: white; color: black; padding: 15px 30px; border-radius: 100px;
-            font-weight: 800; text-transform: uppercase; text-decoration: none;
-            display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
+        .subtitulo {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
         }
-        .btn-whats:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3); }
 
-        @media (max-width: 1024px) {
-            .container-bento { grid-template-columns: 1fr; }
-            .card-hero, .card-cta, .card-services, .card-stack { grid-column: span 1; text-align: center; }
-            .card-hero { flex-direction: column; }
-            .nome-agua { font-size: 2.2rem; }
+        /* Botões de Ação */
+        .btn {
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white; padding: 20px; border-radius: 20px;
+            text-decoration: none; font-weight: 700; text-transform: uppercase;
+            font-size: 0.85rem; transition: 0.4s;
+            margin-bottom: 15px;
+        }
+
+        .btn:hover { 
+            background: rgba(0, 210, 255, 0.1); 
+            border-color: var(--azul-marca); 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
+        }
+
+        footer {
+            margin-top: 40px;
+            opacity: 0.2;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="particles"></div>
     <div class="mouse-glow" id="glow"></div>
 
-    <main class="container-bento">
-        
-        <section class="bento-card card-hero">
-            <div class="text-left">
-                <span class="text-blue-500 font-bold uppercase tracking-[4px] text-xs">Sistemas de Elite</span>
-                <div class="mt-2 mb-4">
-                    <h1 class="nome-agua">Fagner Martins</h1>
-                </div>
-                <p class="text-gray-400 max-w-md leading-relaxed">Desenvolvimento de <b>Sistemas e Sites Web</b>. Especialista em automação inteligente e performance.</p>
-            </div>
-            <img src="Logo-Fagner-Martins.png" alt="Logo" class="logo-bento">
-        </section>
+    <main class="card-principal">
+        <img src="Logo-Fagner-Martins.png" alt="Fagner Martins Logo" class="logo-destaque">
 
-        <section class="bento-card card-cta">
-            <i class="fab fa-whatsapp text-4xl mb-4"></i>
-            <h2 class="text-xl font-bold mb-6 text-center">Vamos criar seu sistema?</h2>
-            <a href="https://wa.me/5584996312810" target="_blank" class="btn-whats">WHATSAPP</a>
-        </section>
+        <div class="flex justify-center">
+            <h1 class="nome-agua">Fagner Martins</h1>
+        </div>
 
-        <section class="bento-card card-services">
-            <h3 class="text-blue-500 font-bold uppercase text-xs mb-4">Serviços</h3>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="p-4 bg-white/5 rounded-2xl border border-white/5"><p class="font-bold text-sm">Dashboards</p></div>
-                <div class="p-4 bg-white/5 rounded-2xl border border-white/5"><p class="font-bold text-sm">Sistemas ERP</p></div>
-                <div class="p-4 bg-white/5 rounded-2xl border border-white/5"><p class="font-bold text-sm">APIs</p></div>
-                <div class="p-4 bg-white/5 rounded-2xl border border-white/5"><p class="font-bold text-sm">Sites Web</p></div>
-            </div>
-        </section>
+        <p class="subtitulo">
+            Desenvolvimento de <span style="color: var(--azul-marca); font-weight: 700;">Sistemas e Sites Web</span>
+        </p>
 
-        <section class="bento-card card-stack">
-            <h3 class="text-gray-500 font-bold uppercase text-xs mb-4">Tecnologias</h3>
-            <div class="flex flex-wrap gap-3">
-                <span class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-black border border-white/10">LARAVEL</span>
-                <span class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-black border border-white/10">FILAMENT</span>
-                <span class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-black border border-white/10">DOCKER</span>
-                <span class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-black border border-white/10">TAILWIND</span>
-            </div>
-        </section>
+        <div class="flex flex-col">
+            <a href="https://wa.me/5584996312810" target="_blank" class="btn">
+                <i class="fab fa-whatsapp text-green-500 text-2xl"></i>
+                Solicitar Orçamento
+            </a>
 
+            <a href="https://github.com/fagner-martins" target="_blank" class="btn">
+                <i class="fab fa-github text-white text-2xl"></i>
+                Ver Repositórios
+            </a>
+        </div>
+
+        <footer>
+            Sistemas Inteligentes • Fagner Martins
+        </footer>
     </main>
 
-    <footer class="text-center pb-10 opacity-20 text-[10px] tracking-[6px] uppercase font-bold">
-        Sistemas Inteligentes • Fagner Martins
-    </footer>
-
     <script>
+        // Lógica do rastro de luz do mouse
         const glow = document.getElementById('glow');
         document.addEventListener('mousemove', (e) => {
             const x = (e.clientX / window.innerWidth) * 100;
