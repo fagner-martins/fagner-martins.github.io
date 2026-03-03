@@ -8,116 +8,150 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --blue: #007BFF; --dark: #020617; }
-        body { background: var(--dark); margin: 0; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center; }
+        :root { --blue-light: #007BFF; --blue-deep: #020617; }
+        
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: var(--blue-deep); 
+            overflow: hidden; 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
 
-        /* Fundo Animado */
-        .ocean { height: 40%; width: 100%; position: absolute; bottom: 0; left: 0; z-index: 1; opacity: 0.3; }
+        /* Efeito de Água Enchendo a Tela */
+        .water-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; /* Preenche a tela toda */
+            background: linear-gradient(180deg, rgba(0, 123, 255, 0.15) 0%, var(--blue-deep) 100%);
+            z-index: 1;
+        }
+
+        /* Ondas no topo da água */
+        .wave-container {
+            position: absolute;
+            top: -100px; /* Ajusta para a onda aparecer no topo */
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
         .wave {
             background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg') repeat-x; 
-            position: absolute; top: -198px; width: 6400px; height: 198px;
-            animation: wave 12s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+            position: absolute;
+            width: 6400px;
+            height: 198px;
+            animation: wave-move 10s linear infinite;
             filter: invert(36%) sepia(87%) saturate(2255%) hue-rotate(198deg);
+            opacity: 0.3;
         }
-        @keyframes wave { 0% { margin-left: 0; } 100% { margin-left: -1600px; } }
 
-        /* Card Glassmorphism */
+        .wave.second {
+            animation: wave-move 15s linear infinite;
+            opacity: 0.1;
+            top: 20px;
+        }
+
+        @keyframes wave-move {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-1600px); }
+        }
+
+        /* Estilo do Card Central */
         .glass-card {
             background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(35px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative; z-index: 10;
-        }
-
-        /* Logo Ultra Visível */
-        .logo-main { 
-            width: 85%; /* Logo bem maior */
-            max-width: 320px;
-            margin: 0 auto;
-            filter: drop-shadow(0 0 35px rgba(0, 123, 255, 0.6));
-            animation: float 5s ease-in-out infinite;
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } }
-
-        /* Texto de Digitação */
-        .typing-container {
-            font-family: 'Lexend', sans-serif;
-            min-height: 24px;
-            background: linear-gradient(90deg, #fff, var(--blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn-premium {
-            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(40px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.4s ease;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 0 100px rgba(0, 123, 255, 0.1);
         }
-        .btn-premium:hover {
-            background: rgba(0, 123, 255, 0.15);
-            border-color: var(--blue);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+
+        .logo-main { 
+            width: 280px;
+            filter: drop-shadow(0 0 40px rgba(0, 123, 255, 0.7));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .typing-text {
+            font-family: 'Lexend', sans-serif;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(0, 123, 255, 0.8);
+        }
+
+        .btn-link {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-link:hover {
+            background: rgba(0, 123, 255, 0.2);
+            border-color: var(--blue-light);
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
         }
     </style>
 </head>
 <body>
 
-    <div class="ocean"><div class="wave"></div></div>
+    <div class="water-bg">
+        <div class="wave-container">
+            <div class="wave"></div>
+            <div class="wave second"></div>
+        </div>
+    </div>
 
-    <main class="w-full max-w-lg p-6 relative z-50">
-        <div class="glass-card rounded-[4rem] p-12 text-center shadow-2xl shadow-blue-900/20">
+    <main class="relative z-50 w-full max-w-md p-6">
+        <div class="glass-card rounded-[4rem] p-12 text-center">
             
-            <div class="mb-14">
-                <img src="Logo-Fagner-Martins.png" alt="Fagner Martins" class="logo-main">
-            </div>
+            <img src="Logo-Fagner-Martins.png" alt="Logo" class="logo-main mx-auto mb-12">
 
-            <div class="mb-14">
-                <p id="typing" class="typing-container text-lg font-black uppercase tracking-[0.2em] italic"></p>
-                <div class="h-[2px] w-12 bg-blue-600 mx-auto mt-4 opacity-50"></div>
+            <div class="mb-12 h-8">
+                <p id="typing" class="typing-text text-sm font-black uppercase tracking-[0.3em] italic"></p>
             </div>
 
             <div class="space-y-4">
-                <a href="https://wa.me/55DDD9XXXXXXXX" target="_blank" class="btn-premium flex items-center justify-between p-6 rounded-[2rem] w-full group">
-                    <span class="flex items-center gap-4 text-white font-bold text-xs tracking-widest">
-                        <i class="fab fa-whatsapp text-green-500 text-xl"></i> SOLICITAR ORÇAMENTO
-                    </span>
-                    <i class="fas fa-arrow-right text-[10px] text-blue-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all"></i>
+                <a href="https://wa.me/5584996312810" target="_blank" class="btn-link flex items-center gap-4 p-5 rounded-3xl w-full group">
+                    <i class="fab fa-whatsapp text-green-500 text-2xl"></i>
+                    <span class="text-white font-bold text-[10px] tracking-[0.2em]">ORÇAMENTO NO WHATSAPP</span>
                 </a>
 
-                <a href="https://github.com/fagner-martins" target="_blank" class="btn-premium flex items-center justify-between p-6 rounded-[2rem] w-full group">
-                    <span class="flex items-center gap-4 text-white font-bold text-xs tracking-widest">
-                        <i class="fab fa-github text-xl"></i> PORTFÓLIO GITHUB
-                    </span>
-                    <i class="fas fa-arrow-right text-[10px] text-blue-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all"></i>
+                <a href="https://github.com/fagner-martins" target="_blank" class="btn-link flex items-center gap-4 p-5 rounded-3xl w-full">
+                    <i class="fab fa-github text-white text-2xl"></i>
+                    <span class="text-white font-bold text-[10px] tracking-[0.2em]">REPOSITÓRIO GITHUB</span>
                 </a>
             </div>
 
-            <p class="mt-12 text-gray-600 text-[8px] font-bold uppercase tracking-[0.4em]">Expert Laravel & Filament • 2026</p>
+            <p class="mt-14 text-white/20 text-[8px] font-bold uppercase tracking-widest">Laravel & Filament Expert • 2026</p>
         </div>
     </main>
 
     <script>
-        const textArr = [
-            "Soluções Inteligentes", 
-            "Sistemas Sob Medida", 
-            "Laravel & Filament Expert", 
-            "Arquitetura de Software",
-            "Sua Ideia, Meu Código"
+        const texts = [
+            "Desenvilvimento de Lojas Virtuais"
+            "Desenvolvimento de Sites"
+            "Sistemas Web de Alta Performance",
+            "Desenvolvimento Laravel & Filament",
+            "Sua Ideia Transformada em Código",
+            "Soluções Full Stack Premium"
         ];
-        let idx = 0, charIdx = 0, isDeleting = false;
+        let i = 0, j = 0, isDel = false;
         function type() {
-            const current = textArr[idx];
-            const display = isDeleting ? current.substring(0, charIdx--) : current.substring(0, charIdx++);
-            document.getElementById('typing').textContent = display;
-            
-            if (!isDeleting && charIdx === current.length + 1) { 
-                isDeleting = true; setTimeout(type, 2000); 
-            } else if (isDeleting && charIdx === 0) { 
-                isDeleting = false; idx = (idx + 1) % textArr.length; setTimeout(type, 500); 
-            } else { 
-                setTimeout(type, isDeleting ? 40 : 80); 
-            }
+            const current = texts[i];
+            document.getElementById('typing').textContent = isDel ? current.substring(0, j--) : current.substring(0, j++);
+            if (!isDel && j === current.length + 1) { isDel = true; setTimeout(type, 2000); }
+            else if (isDel && j === 0) { isDel = false; i = (i + 1) % texts.length; setTimeout(type, 500); }
+            else { setTimeout(type, isDel ? 40 : 80); }
         }
         type();
     </script>
