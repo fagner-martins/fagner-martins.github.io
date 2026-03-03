@@ -3,121 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fagner Martins | Desenvolvimento de Sistemas e Sites Web</title>
+    <title>Fagner Martins | Sistemas e Sites Web</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@900&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root { 
-            --azul-claro: #00D2FF; 
-            --azul-medio: #007BFF;
-            --azul-escuro: #001A33; 
-            --fundo: #010409;
+            --azul-agua: #00D2FF; 
+            --azul-profundo: #001A33; 
+            --preto-fundo: #010409;
         }
         
         body { 
-            background: radial-gradient(circle at 50% 50%, var(--azul-escuro) 0%, var(--fundo) 100%);
+            background: radial-gradient(circle at 50% 50%, var(--azul-profundo) 0%, var(--preto-fundo) 100%);
             margin: 0; min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
-            font-family: 'Lexend', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        .painel-vidro {
+        .cartao-principal {
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 45px;
-            padding: 60px 40px;
-            width: 90%; max-width: 500px;
+            border-radius: 40px;
+            padding: 50px 30px;
+            width: 90%; max-width: 450px;
             text-align: center;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
         }
 
-        .logo-principal {
-            width: 280px; margin: 0 auto 30px;
-            filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.4));
-            animation: flutuar 5s ease-in-out infinite;
+        .logo-fm {
+            width: 260px; margin: 0 auto 30px;
+            filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.3));
+            animation: flutuar 4s ease-in-out infinite;
         }
-
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* --- NOVO EFEITO LÍQUIDO SEGURO --- */
-        .nome-agua {
-            font-size: 2.5rem;
+        /* --- O EFEITO DE ÁGUA REAL (SVG) --- */
+        .container-agua {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        svg text {
+            font-family: 'Lexend', sans-serif;
             font-weight: 900;
             text-transform: uppercase;
+            font-size: 38px;
             letter-spacing: 2px;
-            /* Gradiente que simula a água */
-            background: linear-gradient(
-                to bottom, 
-                rgba(255,255,255,0.1) 40%, 
-                var(--azul-claro) 50%, 
-                var(--azul-medio) 100%
-            );
-            background-size: 200% 200%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: ondas 4s ease-in-out infinite;
-            display: inline-block;
         }
 
-        @keyframes ondas {
-            0%, 100% { background-position: 50% 100%; }
-            50% { background-position: 50% 10%; } /* Faz a cor "subir" e "descer" */
+        /* Texto de Fundo (Borda) */
+        .texto-contorno {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 1px;
         }
 
-        .botao-acao {
-            display: flex; align-items: center; justify-content: center; gap: 15px;
+        /* Texto de Preenchimento (Água) */
+        .texto-preenchimento {
+            fill: var(--azul-agua);
+            mask: url(#mask-agua);
+        }
+
+        /* Animação da Onda */
+        @keyframes moverOnda {
+            0% { transform: translateX(-200px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes subirAgua {
+            0%, 100% { transform: translateY(15px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .onda {
+            animation: moverOnda 3s linear infinite;
+        }
+
+        .onda-grupo {
+            animation: subirAgua 6s ease-in-out infinite;
+        }
+
+        /* Botões */
+        .botao {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white; padding: 20px; border-radius: 20px;
-            text-decoration: none; font-weight: 800; text-transform: uppercase;
-            font-size: 0.85rem; transition: 0.4s;
-            margin-top: 15px;
+            color: white; padding: 18px; border-radius: 18px;
+            text-decoration: none; font-weight: 700; text-transform: uppercase;
+            font-size: 0.8rem; transition: 0.3s; margin-top: 15px;
         }
+        .botao:hover { background: rgba(0, 123, 255, 0.2); border-color: var(--azul-agua); transform: scale(1.02); }
 
-        .botao-acao:hover { 
-            background: rgba(0, 123, 255, 0.2); 
-            border-color: var(--azul-claro); 
-            transform: scale(1.02);
-        }
-
-        .subtitulo {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            margin: 15px 0 35px;
-        }
+        .subtitulo { color: #94a3b8; font-size: 0.9rem; margin-bottom: 30px; }
+        .highlight { color: var(--azul-agua); font-weight: 700; }
     </style>
 </head>
 <body>
 
-    <main class="painel-vidro">
-        <img src="Logo-Fagner-Martins.png" alt="Fagner Martins" class="logo-principal">
+    <main class="cartao-principal">
+        <img src="Logo-Fagner-Martins.png" alt="Fagner Martins" class="logo-fm">
 
-        <div>
-            <h1 class="nome-agua">Fagner Martins</h1>
+        <div class="container-agua">
+            <svg width="400" height="80" viewBox="0 0 400 80">
+                <defs>
+                    <mask id="mask-agua">
+                        <g class="onda-grupo">
+                            <path class="onda" d="M 0 40 Q 50 30 100 40 T 200 40 T 300 40 T 400 40 V 80 H 0 Z" fill="white" />
+                            <path class="onda" d="M -200 40 Q -150 50 -100 40 T 0 40 T 100 40 T 200 40 V 80 H -200 Z" fill="white" />
+                        </g>
+                    </mask>
+                </defs>
+                <text x="50%" y="50%" dy=".35em" text-anchor="middle" class="texto-contorno">FAGNER MARTINS</text>
+                <text x="50%" y="50%" dy=".35em" text-anchor="middle" class="texto-preenchimento">FAGNER MARTINS</text>
+            </svg>
         </div>
 
         <p class="subtitulo">
-            Desenvolvimento de <span style="color: var(--azul-claro); font-weight: 700;">Sistemas e Sites Web</span>
+            Desenvolvimento de <span class="highlight">Sistemas e Sites Web</span>
         </p>
 
         <div class="flex flex-col">
-            <a href="https://wa.me/5584996312810" target="_blank" class="botao-acao">
-                <i class="fab fa-whatsapp text-green-500 text-2xl"></i>
-                Solicitar Orçamento
+            <a href="https://wa.me/5584996312810" target="_blank" class="botao">
+                <i class="fab fa-whatsapp text-green-400 text-xl"></i> Solicitar Orçamento
             </a>
-
-            <a href="https://github.com/fagner-martins" target="_blank" class="botao-acao">
-                <i class="fab fa-github text-white text-2xl"></i>
-                Ver Repositórios
+            <a href="https://github.com/fagner-martins" target="_blank" class="botao">
+                <i class="fab fa-github text-xl"></i> Ver Repositórios
             </a>
         </div>
 
-        <footer class="mt-12 opacity-20 text-[10px] uppercase tracking-[5px] font-bold">
+        <footer class="mt-12 opacity-20 text-[9px] uppercase tracking-[4px] font-bold">
             Sistemas Inteligentes
         </footer>
     </main>
