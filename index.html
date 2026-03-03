@@ -3,123 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fagner Martins | Desenvolvimento de Sistemas</title>
+    <title>Fagner Martins | Especialista em Sistemas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Fundo com animação de grade tecnológica */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap');
+
+        :root { --primary: #007bff; --bg: #030712; }
+
         body {
-            background-color: #050505;
-            background-image: linear-gradient(0deg, transparent 24%, rgba(0, 123, 255, .05) 25%, rgba(0, 123, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 123, 255, .05) 75%, rgba(0, 123, 255, .05) 76%, transparent 77%, transparent), 
-                              linear-gradient(90deg, transparent 24%, rgba(0, 123, 255, .05) 25%, rgba(0, 123, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 123, 255, .05) 75%, rgba(0, 123, 255, .05) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
+            margin: 0; padding: 0;
+            background-color: var(--bg);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             color: white;
+            overflow-x: hidden;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        /* Brilho de fundo que segue o movimento */
-        .glow {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(0, 123, 255, 0.15) 0%, transparent 70%);
+        /* Fundo com Manchas de Luz Animadas */
+        .orb {
+            position: absolute; width: 600px; height: 600px;
             border-radius: 50%;
-            z-index: 0;
-            animation: pulse 8s infinite alternate;
+            filter: blur(80px);
+            z-index: 0; opacity: 0.4;
+            animation: move 20s infinite alternate;
+        }
+        .orb-1 { background: #0047ab; top: -10%; left: -10%; }
+        .orb-2 { background: #001a33; bottom: -10%; right: -10%; animation-delay: -5s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 50px) scale(1.1); }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1) translate(-10%, -10%); }
-            100% { transform: scale(1.2) translate(10%, 10%); }
-        }
-
-        .main-container {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        /* Estilo da Logo */
-        .logo-img {
-            max-width: 400px;
-            margin: 0 auto 40px;
-            filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.4));
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* Botões Estilo Glassmorphism Puro */
-        .nav-button {
-            background: rgba(255, 255, 255, 0.03);
+        /* Container Principal */
+        .glass-card {
+            position: relative; z-index: 10;
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 20px 40px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            border-radius: 40px;
+            padding: 50px 30px;
+            width: 100%; max-width: 450px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .nav-button:hover {
+        .logo-img {
+            width: 300px; margin: 0 auto 35px;
+            filter: drop-shadow(0 10px 20px rgba(0, 123, 255, 0.3));
+        }
+
+        /* Botões de Ação Modernos */
+        .action-btn {
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px; border-radius: 20px;
+            margin-bottom: 15px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none; color: white;
+            font-weight: 700; font-size: 0.9rem;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .action-btn:hover {
+            border-color: var(--primary);
             background: rgba(0, 123, 255, 0.1);
-            border-color: #007bff;
-            transform: translateX(10px);
-            box-shadow: -10px 0 20px rgba(0, 123, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2);
         }
 
-        .tagline {
-            font-size: 0.8rem;
-            color: #007bff;
-            font-weight: 900;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
+        .action-btn i { font-size: 1.5rem; }
+
+        /* Animação de digitação do título */
+        .type-wrap {
+            color: var(--primary); font-weight: 800;
+            font-size: 0.8rem; letter-spacing: 3px;
+            margin-bottom: 30px; text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
-    <div class="glow"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-    <main class="main-container">
+    <main class="glass-card">
         <img src="Logo-Fagner-Martins.png" alt="Fagner Martins" class="logo-img">
 
-        <p class="tagline">Arquitetura de Sistemas Web</p>
-        
-        <div class="flex flex-col gap-2">
-            <a href="https://wa.me/5599999999999" target="_blank" class="nav-button">
-                <span><i class="fab fa-whatsapp mr-4 text-green-500"></i> Solicitar Orçamento</span>
-                <i class="fas fa-chevron-right text-xs opacity-50"></i>
+        <div class="type-wrap">
+            <span id="typing"></span>
+        </div>
+
+        <div class="flex flex-col">
+            <a href="https://wa.me/55DDD9XXXXXXXX" target="_blank" class="action-btn">
+                <i class="fab fa-whatsapp text-green-500"></i>
+                Solicitar Orçamento
             </a>
 
-            <a href="https://github.com/fagner-martins" target="_blank" class="nav-button">
-                <span><i class="fab fa-github mr-4"></i> Ver Repositórios</span>
-                <i class="fas fa-chevron-right text-xs opacity-50"></i>
+            <a href="https://github.com/fagner-martins" target="_blank" class="action-btn">
+                <i class="fab fa-github"></i>
+                Ver Portfólio GitHub
             </a>
         </div>
 
-        <p class="mt-12 text-[10px] opacity-30 tracking-[3px] uppercase">
-            Laravel • Filament • Alta Performance • 2026
-        </p>
+        <footer class="mt-10 opacity-20 text-[10px] font-bold tracking-[4px]">
+            LARAVEL & FILAMENT EXPERT • 2026
+        </footer>
     </main>
 
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#typing', {
+            strings: ['Sistemas de Alta Classe', 'Arquitetura de Software', 'Sites de Alta Performance'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+    </script>
 </body>
 </html>
