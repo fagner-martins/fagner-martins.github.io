@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --accent: #007BFF; --bg-dark: #050505; --card-bg: rgba(15, 15, 15, 0.9); }
+        :root { --accent: #007BFF; --bg-dark: #050505; --card-bg: rgba(15, 15, 15, 0.8); }
         
         body { 
             background: var(--bg-dark); color: white; 
@@ -17,19 +17,10 @@
             position: relative;
         }
 
-        /* --- EFEITO DE MOUSE (SPOTLIGHT) --- */
         .mouse-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle 600px at var(--x, 50%) var(--y, 50%), rgba(0, 123, 255, 0.12), transparent 80%);
+            background: radial-gradient(circle 600px at var(--x, 50%) var(--y, 50%), rgba(0, 123, 255, 0.15), transparent 80%);
             z-index: 1; pointer-events: none;
-        }
-
-        /* Partículas sutis */
-        .particles {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 0;
         }
 
         .container-bento {
@@ -40,37 +31,36 @@
 
         .bento-card {
             background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 32px; padding: 30px; backdrop-filter: blur(12px);
+            border-radius: 32px; padding: 30px; backdrop-filter: blur(20px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .bento-card:hover { 
             border-color: var(--accent); 
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
         }
 
-        /* --- LOGO GRANDE EM DESTAQUE --- */
+        /* --- LOGO GRANDE --- */
         .card-logo-foco {
             grid-column: span 4;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 60px 20px; background: transparent; border: none;
+            padding: 40px 20px; background: transparent; border: none;
         }
 
         .logo-bento-grande {
-            width: 480px; /* Aumentado drasticamente para destaque total */
-            max-width: 95%;
-            filter: drop-shadow(0 0 30px rgba(0, 123, 255, 0.4));
+            width: 450px; 
+            max-width: 90%;
+            filter: drop-shadow(0 0 30px rgba(0, 123, 255, 0.3));
             animation: flutuar 6s ease-in-out infinite;
         }
 
-        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* --- NOME COM ANIMAÇÃO DE ÁGUA --- */
         .nome-agua {
-            font-size: 3.5rem; font-weight: 800; color: #fff;
+            font-size: 3.2rem; font-weight: 800; color: #fff;
             position: relative; text-transform: uppercase;
-            line-height: 1.1; display: inline-block; margin-top: 20px;
+            line-height: 1.1; display: inline-block; margin-top: 15px;
         }
 
         .nome-agua::before {
@@ -86,36 +76,37 @@
             50% { clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%); }
         }
 
-        /* Organização dos Cards Inferiores */
         .card-services { grid-column: span 3; }
         .card-cta { grid-column: span 1; background: linear-gradient(135deg, #007BFF 0%, #001a33 100%); text-align: center; }
-        .card-stack { grid-column: span 4; }
 
         .btn-whats {
             background: white; color: black; padding: 15px 30px; border-radius: 100px;
             font-weight: 800; text-transform: uppercase; text-decoration: none;
             display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
         }
-        .btn-whats:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3); }
+        .btn-whats:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2); }
 
-        .service-tag {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            padding: 12px 20px; border-radius: 16px; font-weight: 700; font-size: 0.85rem;
-            transition: 0.3s; display: flex; align-items: center; gap: 10px;
+        .status-dot {
+            display: inline-block; width: 10px; height: 10px; background: #22c55e;
+            border-radius: 50%; margin-right: 8px; animation: pulse 2s infinite;
         }
-        .service-tag:hover { background: rgba(0, 123, 255, 0.1); border-color: var(--accent); color: var(--accent); }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+
+        .service-item {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+            padding: 12px 18px; border-radius: 16px; font-weight: 600; font-size: 0.8rem;
+        }
 
         @media (max-width: 1024px) {
             .container-bento { grid-template-columns: 1fr; }
-            .card-logo-foco, .card-services, .card-cta, .card-stack { grid-column: span 1; }
-            .nome-agua { font-size: 2.2rem; }
+            .card-logo-foco, .card-services, .card-cta { grid-column: span 1; }
             .logo-bento-grande { width: 300px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="particles"></div>
     <div class="mouse-glow" id="glow"></div>
 
     <main class="container-bento">
@@ -123,42 +114,33 @@
         <section class="card-logo-foco">
             <img src="Logo-Fagner-Martins.png" alt="Logo Fagner Martins" class="logo-bento-grande">
             <h1 class="nome-agua">Fagner Martins</h1>
-            <p class="text-gray-400 mt-4 tracking-[2px] uppercase text-sm font-bold">Arquiteto de Ecossistemas Digitais</p>
+            <p class="text-gray-400 mt-4 font-bold text-sm tracking-wide">
+                <span class="status-dot"></span> Disponível para Projetos
+            </p>
         </section>
 
         <section class="bento-card card-services">
-            <h3 class="text-blue-500 font-bold uppercase text-xs mb-6 tracking-widest">Soluções Especializadas</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="service-tag"><i class="fas fa-rocket text-blue-500"></i> Landing Pages</div>
-                <div class="service-tag"><i class="fas fa-newspaper text-blue-500"></i> Portais Gerenciáveis</div>
-                <div class="service-tag"><i class="fas fa-chart-pie text-blue-500"></i> Dashboards Web</div>
-                <div class="service-tag"><i class="fas fa-cogs text-blue-500"></i> Sistemas ERP/CRM</div>
-                <div class="service-tag"><i class="fas fa-link text-blue-500"></i> APIs Escaláveis</div>
-                <div class="service-tag"><i class="fas fa-shield-alt text-blue-500"></i> Segurança de Dados</div>
+            <h3 class="text-blue-500 font-bold uppercase text-xs mb-6 tracking-widest">Especialista em Soluções Web de Alta Performance</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="service-item"><i class="fas fa-rocket text-blue-500 mr-2"></i> Landing Pages</div>
+                <div class="service-item"><i class="fas fa-newspaper text-blue-500 mr-2"></i> Portais de Notícias</div>
+                <div class="service-item"><i class="fas fa-chart-line text-blue-500 mr-2"></i> Dashboards Web</div>
+                <div class="service-item"><i class="fas fa-database text-blue-500 mr-2"></i> Sistemas ERP/CRM</div>
+                <div class="service-item"><i class="fas fa-code text-blue-500 mr-2"></i> APIs Escaláveis</div>
+                <div class="service-item"><i class="fas fa-mobile-alt text-blue-500 mr-2"></i> Sites Responsivos</div>
             </div>
         </section>
 
         <section class="bento-card card-cta flex flex-col justify-center items-center">
             <i class="fab fa-whatsapp text-5xl mb-4"></i>
-            <h2 class="text-xl font-black mb-6 leading-tight">VAMOS CRIAR SEU PROJETO?</h2>
-            <a href="https://wa.me/5584996312810" target="_blank" class="btn-whats">CONVERSAR</a>
-        </section>
-
-        <section class="bento-card card-stack text-center">
-            <h3 class="text-gray-500 font-bold uppercase text-xs mb-6 tracking-widest">Stack Tecnológica</h3>
-            <div class="flex flex-wrap justify-center gap-4">
-                <span class="px-6 py-2 bg-white/5 rounded-full text-[11px] font-black border border-white/10 hover:border-blue-500 transition-all">LARAVEL / PHP</span>
-                <span class="px-6 py-2 bg-white/5 rounded-full text-[11px] font-black border border-white/10 hover:border-blue-500 transition-all">FILAMENT</span>
-                <span class="px-6 py-2 bg-white/5 rounded-full text-[11px] font-black border border-white/10 hover:border-blue-500 transition-all">MYSQL</span>
-                <span class="px-6 py-2 bg-white/5 rounded-full text-[11px] font-black border border-white/10 hover:border-blue-500 transition-all">DOCKER</span>
-                <span class="px-6 py-2 bg-white/5 rounded-full text-[11px] font-black border border-white/10 hover:border-blue-500 transition-all">TAILWIND CSS</span>
-            </div>
+            <h2 class="text-xl font-black mb-6 leading-tight uppercase">Bora criar seu sistema?</h2>
+            <a href="https://wa.me/5584996312810?text=Olá+Fagner!+Vi+seu+site+e+gostaria+de+falar+sobre+um+projeto." target="_blank" class="btn-whats">CONVERSAR</a>
         </section>
 
     </main>
 
-    <footer class="text-center pb-10 opacity-20 text-[10px] tracking-[8px] uppercase font-bold">
-        Sistemas de Alta Performance • Fagner Martins
+    <footer class="text-center pb-10 opacity-20 text-[10px] tracking-[6px] uppercase font-bold">
+        Sistemas Inteligentes • Fagner Martins
     </footer>
 
     <script>
@@ -171,3 +153,4 @@
         });
     </script>
 </body>
+</html>
