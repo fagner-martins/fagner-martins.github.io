@@ -3,146 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fagner Martins | Sistemas e Sites Web</title>
-    
+    <title>Fagner Martins | Desenvolvimento de Sistemas Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@900&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        :root { 
-            --azul-agua: #00D2FF; 
-            --azul-profundo: #001A33; 
-            --preto-fundo: #010409;
-        }
+        :root { --accent: #007BFF; --bg-dark: #0a0a0a; --card-bg: rgba(20, 20, 20, 0.8); }
         
         body { 
-            background: radial-gradient(circle at 50% 50%, var(--azul-profundo) 0%, var(--preto-fundo) 100%);
-            margin: 0; min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-dark); color: white; 
             font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0; min-height: 100vh; overflow-x: hidden;
         }
 
-        .cartao-principal {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 50px 30px;
-            width: 90%; max-width: 450px;
-            text-align: center;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+        /* Efeito de Brilho que segue o Mouse */
+        .spotlight {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 123, 255, 0.1) 0%, transparent 40%);
+            z-index: 1; pointer-events: none;
         }
 
-        .logo-fm {
-            width: 260px; margin: 0 auto 30px;
-            filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.3));
-            animation: flutuar 4s ease-in-out infinite;
-        }
-        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-        /* --- O EFEITO DE ÁGUA REAL (SVG) --- */
-        .container-agua {
-            width: 100%;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px;
+        .container-bento {
+            position: relative; z-index: 10;
+            display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto;
+            gap: 20px; max-width: 1200px; margin: 40px auto; padding: 20px;
         }
 
-        svg text {
-            font-family: 'Lexend', sans-serif;
-            font-weight: 900;
+        .bento-card {
+            background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px; padding: 30px; backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .bento-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+
+        /* --- ANIMAÇÃO DE ÁGUA NO NOME --- */
+        .nome-container { position: relative; display: inline-block; }
+        
+        .nome-agua {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff; /* Nome fica branco */
+            position: relative;
             text-transform: uppercase;
-            font-size: 38px;
-            letter-spacing: 2px;
+            margin: 0;
+            line-height: 1.1;
         }
 
-        /* Texto de Fundo (Borda) */
-        .texto-contorno {
-            fill: none;
-            stroke: rgba(255, 255, 255, 0.1);
-            stroke-width: 1px;
+        .nome-agua::before {
+            content: "Fagner Martins";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            color: var(--accent); /* Azul da logomarca */
+            overflow: hidden;
+            border-bottom: 2px solid var(--accent);
+            animation: agua 4s ease-in-out infinite;
+            -webkit-text-fill-color: var(--accent);
         }
 
-        /* Texto de Preenchimento (Água) */
-        .texto-preenchimento {
-            fill: var(--azul-agua);
-            mask: url(#mask-agua);
+        @keyframes agua {
+            0%, 100% { clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%); }
+            50% { clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%); }
         }
 
-        /* Animação da Onda */
-        @keyframes moverOnda {
-            0% { transform: translateX(-200px); }
-            100% { transform: translateX(0); }
+        /* Blocos Específicos */
+        .card-hero { grid-column: span 3; display: flex; align-items: center; justify-content: space-between; }
+        .card-cta { grid-column: span 1; background: linear-gradient(135deg, #007BFF 0%, #003d80 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .card-services { grid-column: span 2; }
+        .card-stack { grid-column: span 2; }
+
+        .logo-bento { width: 220px; filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.3)); }
+        
+        .btn-whats {
+            background: white; color: black; padding: 15px 30px; border-radius: 100px;
+            font-weight: 800; text-transform: uppercase; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
         }
 
-        @keyframes subirAgua {
-            0%, 100% { transform: translateY(15px); }
-            50% { transform: translateY(-15px); }
-        }
+        .btn-whats:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2); }
 
-        .onda {
-            animation: moverOnda 3s linear infinite;
+        @media (max-width: 1024px) {
+            .container-bento { grid-template-columns: 1fr; margin-top: 20px; }
+            .card-hero, .card-cta, .card-services, .card-stack { grid-column: span 1; text-align: center; }
+            .card-hero { flex-direction: column; gap: 20px; }
+            .nome-agua { font-size: 2.2rem; }
         }
-
-        .onda-grupo {
-            animation: subirAgua 6s ease-in-out infinite;
-        }
-
-        /* Botões */
-        .botao {
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white; padding: 18px; border-radius: 18px;
-            text-decoration: none; font-weight: 700; text-transform: uppercase;
-            font-size: 0.8rem; transition: 0.3s; margin-top: 15px;
-        }
-        .botao:hover { background: rgba(0, 123, 255, 0.2); border-color: var(--azul-agua); transform: scale(1.02); }
-
-        .subtitulo { color: #94a3b8; font-size: 0.9rem; margin-bottom: 30px; }
-        .highlight { color: var(--azul-agua); font-weight: 700; }
     </style>
 </head>
 <body>
 
-    <main class="cartao-principal">
-        <img src="Logo-Fagner-Martins.png" alt="Fagner Martins" class="logo-fm">
+    <div class="spotlight" id="spotlight"></div>
 
-        <div class="container-agua">
-            <svg width="400" height="80" viewBox="0 0 400 80">
-                <defs>
-                    <mask id="mask-agua">
-                        <g class="onda-grupo">
-                            <path class="onda" d="M 0 40 Q 50 30 100 40 T 200 40 T 300 40 T 400 40 V 80 H 0 Z" fill="white" />
-                            <path class="onda" d="M -200 40 Q -150 50 -100 40 T 0 40 T 100 40 T 200 40 V 80 H -200 Z" fill="white" />
-                        </g>
-                    </mask>
-                </defs>
-                <text x="50%" y="50%" dy=".35em" text-anchor="middle" class="texto-contorno">FAGNER MARTINS</text>
-                <text x="50%" y="50%" dy=".35em" text-anchor="middle" class="texto-preenchimento">FAGNER MARTINS</text>
-            </svg>
-        </div>
+    <main class="container-bento">
+        
+        <section class="bento-card card-hero">
+            <div class="text-left">
+                <span class="text-blue-500 font-bold uppercase tracking-[4px] text-xs">Sistemas de Elite</span>
+                
+                <div class="nome-container mt-2 mb-4">
+                    <h1 class="nome-agua">Fagner Martins</h1>
+                </div>
 
-        <p class="subtitulo">
-            Desenvolvimento de <span class="highlight">Sistemas e Sites Web</span>
-        </p>
+                <p class="text-gray-400 max-w-md leading-relaxed">Arquitetura de <b>Sistemas Web</b> modernos e escaláveis. Especialista em transformar processos em automação inteligente.</p>
+            </div>
+            <img src="Logo-Fagner-Martins.png" alt="Logo" class="logo-bento">
+        </section>
 
-        <div class="flex flex-col">
-            <a href="https://wa.me/5584996312810" target="_blank" class="botao">
-                <i class="fab fa-whatsapp text-green-400 text-xl"></i> Solicitar Orçamento
+        <section class="bento-card card-cta">
+            <i class="fab fa-whatsapp text-4xl mb-4"></i>
+            <h2 class="text-xl font-bold mb-6 text-center">Precisa de um Sistema?</h2>
+            <a href="https://wa.me/5584996312810?text=Olá+Fagner,+preciso+de+um+sistema+web+personalizado." target="_blank" class="btn-whats">
+                Contatar <i class="fas fa-arrow-right text-xs"></i>
             </a>
-            <a href="https://github.com/fagner-martins" target="_blank" class="botao">
-                <i class="fab fa-github text-xl"></i> Ver Repositórios
-            </a>
-        </div>
+        </section>
 
-        <footer class="mt-12 opacity-20 text-[9px] uppercase tracking-[4px] font-bold">
-            Sistemas Inteligentes
-        </footer>
-    </main>
+        <section class="bento-card card-services">
+            <h3 class="text-blue-500 font-bold uppercase text-xs mb-4">O que eu desenvolvo</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="p-4 bg-white/5 rounded-2xl">
+                    <i class="fas fa-layer-group text-blue-500 mb-2"></i>
+                    <p class="font-bold text-sm">Sistemas Internos</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-2xl">
+                    <i class="fas fa-chart-line text-blue-500 mb-2"></i>
+                    <p class="font-bold text-sm">Dashboards Web</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-2xl">
+                    <i class="fas fa-database text-blue-500 mb-2"></i>
+                    <p class="font-bold text-sm">APIs Escaláveis</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-2xl">
+                    <i class="fas fa-desktop text-blue-500 mb-2"></i>
+                    <p class="font-bold text-sm">Aplicações Web</p>
+                </div>
+            </div>
+        </section>
 
-</body>
-</html>
+        <section class="bento-card card-stack">
+            <h3 class="text-gray-500 font-bold uppercase text-xs mb-4">Tecnologias de Ponta</h3>
+            <div class="flex flex-wrap gap-4 items-center h-full">
+                <span class="px-4 py-2 bg-white/5 rounded-full text-xs font-bold border border-white/10 hover:border-blue-500 transition cursor-default">PHP / LARAVEL</span>
+                <span class="px-4 py-2 bg-white/5 rounded-
