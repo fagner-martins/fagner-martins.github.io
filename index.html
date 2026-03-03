@@ -8,55 +8,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --accent: #007BFF; --bg-dark: #0a0a0a; --card-bg: rgba(20, 20, 20, 0.8); }
+        :root { --accent: #007BFF; --bg-dark: #050505; --card-bg: rgba(15, 15, 15, 0.9); }
         
         body { 
             background: var(--bg-dark); color: white; 
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0; min-height: 100vh; overflow-x: hidden;
+            position: relative;
         }
 
-        /* Efeito de Brilho que segue o Mouse */
-        .spotlight {
+        /* --- EFEITO BONITO AO MOVER O MOUSE (SPOTLIGHT + GLOW) --- */
+        .mouse-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 123, 255, 0.1) 0%, transparent 40%);
+            background: radial-gradient(circle 600px at var(--x, 50%) var(--y, 50%), rgba(0, 123, 255, 0.15), transparent 80%);
             z-index: 1; pointer-events: none;
+        }
+
+        /* Partículas sutis de fundo */
+        .particles {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
         }
 
         .container-bento {
             position: relative; z-index: 10;
-            display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto;
+            display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 20px; max-width: 1200px; margin: 40px auto; padding: 20px;
         }
 
         .bento-card {
             background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 32px; padding: 30px; backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            border-radius: 32px; padding: 30px; backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .bento-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .bento-card:hover { 
+            border-color: var(--accent); 
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
 
         /* --- ANIMAÇÃO DE ÁGUA NO NOME --- */
-        .nome-container { position: relative; display: inline-block; }
-        
         .nome-agua {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #fff; /* Nome fica branco */
-            position: relative;
-            text-transform: uppercase;
-            margin: 0;
-            line-height: 1.1;
+            font-size: 3rem; font-weight: 800; color: #fff;
+            position: relative; text-transform: uppercase;
+            line-height: 1.1; display: inline-block;
         }
 
         .nome-agua::before {
             content: "Fagner Martins";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            color: var(--accent); /* Azul da logomarca */
-            overflow: hidden;
-            border-bottom: 2px solid var(--accent);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            color: var(--accent); overflow: hidden;
             animation: agua 4s ease-in-out infinite;
             -webkit-text-fill-color: var(--accent);
         }
@@ -66,81 +70,88 @@
             50% { clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%); }
         }
 
-        /* Blocos Específicos */
+        /* Layout Bento */
         .card-hero { grid-column: span 3; display: flex; align-items: center; justify-content: space-between; }
-        .card-cta { grid-column: span 1; background: linear-gradient(135deg, #007BFF 0%, #003d80 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .card-cta { grid-column: span 1; background: linear-gradient(135deg, #007BFF 0%, #001a33 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .card-services { grid-column: span 2; }
         .card-stack { grid-column: span 2; }
 
-        .logo-bento { width: 220px; filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.3)); }
-        
+        .logo-bento { width: 220px; filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.4)); animation: flutuar 6s ease-in-out infinite; }
+        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
         .btn-whats {
             background: white; color: black; padding: 15px 30px; border-radius: 100px;
             font-weight: 800; text-transform: uppercase; text-decoration: none;
             display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
         }
-
-        .btn-whats:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2); }
+        .btn-whats:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3); }
 
         @media (max-width: 1024px) {
-            .container-bento { grid-template-columns: 1fr; margin-top: 20px; }
+            .container-bento { grid-template-columns: 1fr; }
             .card-hero, .card-cta, .card-services, .card-stack { grid-column: span 1; text-align: center; }
-            .card-hero { flex-direction: column; gap: 20px; }
+            .card-hero { flex-direction: column; }
             .nome-agua { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="spotlight" id="spotlight"></div>
+    <div class="particles"></div>
+    <div class="mouse-glow" id="glow"></div>
 
     <main class="container-bento">
         
         <section class="bento-card card-hero">
             <div class="text-left">
                 <span class="text-blue-500 font-bold uppercase tracking-[4px] text-xs">Sistemas de Elite</span>
-                
-                <div class="nome-container mt-2 mb-4">
+                <div class="mt-2 mb-4">
                     <h1 class="nome-agua">Fagner Martins</h1>
                 </div>
-
-                <p class="text-gray-400 max-w-md leading-relaxed">Arquitetura de <b>Sistemas Web</b> modernos e escaláveis. Especialista em transformar processos em automação inteligente.</p>
+                <p class="text-gray-400 max-w-md leading-relaxed">Desenvolvimento de <b>Sistemas e Sites Web</b>. Especialista em automação inteligente e performance.</p>
             </div>
             <img src="Logo-Fagner-Martins.png" alt="Logo" class="logo-bento">
         </section>
 
         <section class="bento-card card-cta">
             <i class="fab fa-whatsapp text-4xl mb-4"></i>
-            <h2 class="text-xl font-bold mb-6 text-center">Precisa de um Sistema?</h2>
-            <a href="https://wa.me/5584996312810?text=Olá+Fagner,+preciso+de+um+sistema+web+personalizado." target="_blank" class="btn-whats">
-                Contatar <i class="fas fa-arrow-right text-xs"></i>
-            </a>
+            <h2 class="text-xl font-bold mb-6 text-center">Vamos criar seu sistema?</h2>
+            <a href="https://wa.me/5584996312810" target="_blank" class="btn-whats">WHATSAPP</a>
         </section>
 
         <section class="bento-card card-services">
-            <h3 class="text-blue-500 font-bold uppercase text-xs mb-4">O que eu desenvolvo</h3>
+            <h3 class="text-blue-500 font-bold uppercase text-xs mb-4">Serviços</h3>
             <div class="grid grid-cols-2 gap-4">
-                <div class="p-4 bg-white/5 rounded-2xl">
-                    <i class="fas fa-layer-group text-blue-500 mb-2"></i>
-                    <p class="font-bold text-sm">Sistemas Internos</p>
-                </div>
-                <div class="p-4 bg-white/5 rounded-2xl">
-                    <i class="fas fa-chart-line text-blue-500 mb-2"></i>
-                    <p class="font-bold text-sm">Dashboards Web</p>
-                </div>
-                <div class="p-4 bg-white/5 rounded-2xl">
-                    <i class="fas fa-database text-blue-500 mb-2"></i>
-                    <p class="font-bold text-sm">APIs Escaláveis</p>
-                </div>
-                <div class="p-4 bg-white/5 rounded-2xl">
-                    <i class="fas fa-desktop text-blue-500 mb-2"></i>
-                    <p class="font-bold text-sm">Aplicações Web</p>
-                </div>
+                <div class="p-4 bg-white/5 rounded-2xl border border-white/5"><p class="font-bold text-sm">Dashboards</p></div>
+                <div class="p-4 bg-white/5 rounded-2xl border border-white/5"><p class="font-bold text-sm">Sistemas ERP</p></div>
+                <div class="p-4 bg-white/5 rounded-2xl border border-white/5"><p class="font-bold text-sm">APIs</p></div>
+                <div class="p-4 bg-white/5 rounded-2xl border border-white/5"><p class="font-bold text-sm">Sites Web</p></div>
             </div>
         </section>
 
         <section class="bento-card card-stack">
-            <h3 class="text-gray-500 font-bold uppercase text-xs mb-4">Tecnologias de Ponta</h3>
-            <div class="flex flex-wrap gap-4 items-center h-full">
-                <span class="px-4 py-2 bg-white/5 rounded-full text-xs font-bold border border-white/10 hover:border-blue-500 transition cursor-default">PHP / LARAVEL</span>
-                <span class="px-4 py-2 bg-white/5 rounded-
+            <h3 class="text-gray-500 font-bold uppercase text-xs mb-4">Tecnologias</h3>
+            <div class="flex flex-wrap gap-3">
+                <span class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-black border border-white/10">LARAVEL</span>
+                <span class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-black border border-white/10">FILAMENT</span>
+                <span class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-black border border-white/10">DOCKER</span>
+                <span class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-black border border-white/10">TAILWIND</span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center pb-10 opacity-20 text-[10px] tracking-[6px] uppercase font-bold">
+        Sistemas Inteligentes • Fagner Martins
+    </footer>
+
+    <script>
+        const glow = document.getElementById('glow');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            glow.style.setProperty('--x', x + '%');
+            glow.style.setProperty('--y', y + '%');
+        });
+    </script>
+</body>
+</html>
