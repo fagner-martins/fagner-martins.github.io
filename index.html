@@ -3,72 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fagner Martins | Desenvolvimento de Sistemas Profissionais</title>
+    <title>Fagner Martins | Desenvolvimento de Sistemas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --azul-neon: #00d2ff; --azul-profundo: #001a33; --preto-abs: #020202; }
-        
-        body { 
-            background: var(--preto-abs); 
-            color: white; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0; overflow: hidden; height: 100vh;
-            display: flex; align-items: center; justify-content: center;
+        /* Fundo com animação de grade tecnológica */
+        body {
+            background-color: #050505;
+            background-image: linear-gradient(0deg, transparent 24%, rgba(0, 123, 255, .05) 25%, rgba(0, 123, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 123, 255, .05) 75%, rgba(0, 123, 255, .05) 76%, transparent 77%, transparent), 
+                              linear-gradient(90deg, transparent 24%, rgba(0, 123, 255, .05) 25%, rgba(0, 123, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 123, 255, .05) 75%, rgba(0, 123, 255, .05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        /* Fundo com Luzes em Movimento */
-        .fundo-animado {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(0, 210, 255, 0.1) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(0, 123, 255, 0.1) 0%, transparent 40%);
-            z-index: 1; animation: pulso-luz 15s infinite alternate;
+        /* Brilho de fundo que segue o movimento */
+        .glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 123, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: pulse 8s infinite alternate;
         }
 
-        @keyframes pulso-luz {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.1); }
+        @keyframes pulse {
+            0% { transform: scale(1) translate(-10%, -10%); }
+            100% { transform: scale(1.2) translate(10%, 10%); }
         }
 
-        /* Painel de Vidro */
-        .painel-principal {
-            position: relative; z-index: 10;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 60px;
-            width: 90%; max-width: 600px;
+        .main-container {
+            position: relative;
+            z-index: 10;
             text-align: center;
-            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
         }
 
-        /* Logo com Flutuação */
-        .logo-destaque {
-            width: 350px; margin: 0 auto 40px;
-            filter: drop-shadow(0 0 25px rgba(0, 210, 255, 0.4));
-            animation: flutuar 5s ease-in-out infinite;
+        /* Estilo da Logo */
+        .logo-img {
+            max-width: 400px;
+            margin: 0 auto 40px;
+            filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.4));
+            animation: float 4s ease-in-out infinite;
         }
 
-        @keyframes flutuar {
+        @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
 
-        /* Botões Estilizados */
-        .botao-link {
-            display: flex; align-items: center; justify-content: space-between;
-            background: rgba(255, 255, 255, 0.05);
+        /* Botões Estilo Glassmorphism Puro */
+        .nav-button {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px 30px; border-radius: 25px;
-            margin-bottom: 15px; color: white; text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .botao-link:hover {
-            background: rgba(0, 210, 255, 0.15);
-            border-color: var(--azul-neon);
-            transform: scale(1.03);
-            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
+        .nav-button:hover {
+            background: rgba(0, 123, 255, 0.1);
+            border-color: #007bff;
+            transform: translateX(10px);
+            box-shadow: -10px 0 20px rgba(0, 123, 255, 0.2);
         }
+
+        .tagline {
+            font-size: 0.8rem;
+            color: #007bff;
+            font-weight: 900;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow"></div>
+
+    <main class="main-container">
+        <img src="Logo-Fagner-Martins.png" alt="Fagner Martins" class="logo-img">
+
+        <p class="tagline">Arquitetura de Sistemas Web</p>
+        
+        <div class="flex flex-col gap-2">
+            <a href="https://wa.me/5599999999999" target="_blank" class="nav-button">
+                <span><i class="fab fa-whatsapp mr-4 text-green-500"></i> Solicitar Orçamento</span>
+                <i class="fas fa-chevron-right text-xs opacity-50"></i>
+            </a>
+
+            <a href="https://github.com/fagner-martins" target="_blank" class="nav-button">
+                <span><i class="fab fa-github mr-4"></i> Ver Repositórios</span>
+                <i class="fas fa-chevron-right text-xs opacity-50"></i>
+            </a>
+        </div>
+
+        <p class="mt-12 text-[10px] opacity-30 tracking-[3px] uppercase">
+            Laravel • Filament • Alta Performance • 2026
+        </p>
+    </main>
+
+</body>
+</html>
